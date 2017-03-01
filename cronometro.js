@@ -1,9 +1,7 @@
 $(function(){
-var segundos=0;
-var minutos=0;
-var horas=0;
-var centecimas=0;
 
+var centecimas=0;
+var cronometro ;
 $("#start").click(function(){
 
 	$("#start").addClass("disabled");
@@ -11,7 +9,7 @@ $("#start").click(function(){
 	$("#stop").removeClass("disabled");
 	$("#reset").removeClass("disabled");
 
-	var cronometro = setInterval(c,10);
+	cronometro = setInterval(cron,10);
 });
 
 $("#stop").click(function(){
@@ -21,16 +19,28 @@ $("#stop").click(function(){
 		clearInterval(cronometro);
 });
 
-$("#reset").clicl(function(){
-	$("#stop").addClass("disabled");
+$("#reset").click(function(){
 	$("#start").removeClass("disabled");
+	$("#stop").addClass("disabled");
 	$("#reset").addClass("disabled");
 	$("#lap").addClass("disabled");
+	clearInterval(cronometro);
+	centecimas=0;
+	actualizarTimer();
 });
 
 $("#lap").click(function(){
-	$("#laps").append("<li>"+cronometro+"</li>");
+	$("#laps").append("<li>"+$("#timer").val().toString()+"</li>");
 });
+
+function cron (){
+	centecimas++;
+	actualizarTimer();
+}
+
+function actualizarTimer(){
+	$("#timer").html(centecimas);
+}
 
 });
 
