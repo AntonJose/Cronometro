@@ -1,0 +1,15 @@
+{
+  "name": "Cronometro",
+  "homepage": "https://github.com/AntonJose/Cronometro",
+  "description": "Cronometro con semantic y Jquery creado por Anton y Jose",
+  "main": "index.html",
+  "authors": [
+    "Anton",
+    "Jose"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "semantic": "^2.2.9"
+  }
+}
