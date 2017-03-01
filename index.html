@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cronometro por Anton y Jose</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css" />
+	<link rel="stylesheet" type="text/css" href="estilo.css" />
+</head>
+
+<body>
+    <div class="ui container">
+        <div class="ui grid">
+            <div class="eight wide column">
+                <div class="ui inverted segment center aligned">
+					<p id="timer">00:00:00:00</p>
+                </div>
+            </div>
+            <div class="eight wide column">
+                <div class="ui segment center aligned">
+					<ol id="laps">
+						
+					</ol>
+                </div>
+			</div>
+                <div class="ui inverted four buttons">
+                    <button class="ui blue button" id="start">Start</button>
+                    <button class="ui blue button disabled" id="lap">Vuelta</button>
+                    <button class="ui blue button disabled" id="stop">Pausar</button>
+                    <button class="ui blue button disabled" id="reset">Reiniciar</button>
+                </div>
+            </div>
+        </div>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/semantic/dist/semantic.min.js"></script>
+        <script src="cronometro.js"></script>
+</body>
+
+</html>
