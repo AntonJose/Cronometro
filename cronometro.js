@@ -23,7 +23,7 @@ $(function () {
         actualizarTimer();
     });
     $("#lap").click(function () {
-        $("#laps").append("<li>" + $("#timer").val().toString() + "</li>");
+        $("#laps").append("<li>" + visual(centecimas) + "</li>");
     });
 
     function cron() {
