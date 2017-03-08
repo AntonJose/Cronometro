@@ -63,27 +63,30 @@ $(function () {
     };
     
     function vuelta(timeA,timeB,pos){
-        pos++;
-        var color="red";
-        var difer;
+        pos++;  //Para ubicar la posicion en la que nos encontramos de la lista
+        var color="red"; //Variable usada para definir el color
         var d = $("#laps li:nth-child("+(pos-1)+")").text();
-        console.log("D:",d);
+        //En d obtengo el string contemplado en el elemento li actual
+        //console.log("D:",d);
         
-        var a = {
+        
+        /*------------Obtengo valores para comparar y calcular tiempo de esta vuelta-----------*/
+        
+        var a = {   //Tiempo actual que llevamos, el total//
             hrs: timeA.substring(0,2),
             mins: timeA.substring(3,5) ,
             secs: timeA.substring(6,8),
             ms: timeA.substring(9,12)
         };
        /* console.log(a.hrs,a.mins,a.secs,a.ms);*/
-        var b = {
+        var b = {   //Tiempo total de la vuelta anterior//
             hrs: timeB.substring(0,2),
             mins: timeB.substring(3,5) ,
             secs: timeB.substring(6,8),
             ms: timeB.substring(9,12)
         };
         
-        var c = {
+        var c = {   //Aqui calculamos el tiempo de esta vuelta, restando la vuelta anterior al tiempo total//
             hrs: parseInt(a.hrs)-parseInt(b.hrs),
             mins: parseInt(a.mins)-parseInt(b.mins),
             secs: parseInt(a.secs)-parseInt(b.secs),
@@ -96,19 +99,18 @@ $(function () {
                         }
         };
         
-        c.comprueba();
+        c.comprueba(); //Compruebo que los ms no se quedan en negativo
         
-        
-        
+        /*------------Selecciono los valores de distinta manera en la vuelta 1 y el resto de vueltas, aqui guardo la vuelta anterior-----------*/
         if(pos-1==1){
-            difer = {
+            d = {
                 hrs: d.substring(0,2),
                 mins: d.substring(3,5) ,
                 secs: d.substring(6,8),
                 ms: d.substring(9,12)
             }
         }else{
-            difer = {
+            d = {
                 hrs: d.substring(17,19),
                 mins: d.substring(20,22) ,
                 secs: d.substring(23,25),
@@ -116,42 +118,61 @@ $(function () {
             }
         }
         
-       /* console.log(difer.hrs,difer.mins,difer.secs,difer.ms);*/
-        
-        difer = {
-            hrs: parseInt(c.hrs)-parseInt(difer.hrs),
-            mins: parseInt(c.mins)-parseInt(difer.mins),
-            secs: parseInt(c.secs)-parseInt(difer.secs),
-            ms: parseInt(c.ms)-parseInt(difer.ms),
-            comprueba: function(){
-                        
-                        if (difer.ms<0){
-                            
-                            difer.ms = difer.ms*-1;
-                        }
-                    }
-
-        }
-        
-        if (difer.secs<0){
-            color="green";
-            difer.secs = difer.secs*-1;
-        }
-        
-        console.log("Difer.sec: ",difer.secs," difer.ms: ",difer.ms);
-        difer.comprueba();
-        console.log("Difer.sec: ",difer.secs," difer.ms: ",difer.ms);
-        
-        
-        
-        cadena2 = pad(difer.hrs)+":"+pad(difer.mins)+":"+pad(difer.secs)+":"+pad(difer.ms,3);
-        
+        /*------------En cadena tengo la vuelta actual con formato de impresion-----------*/
         cadena = pad(c.hrs)+":"+pad(c.mins)+":"+pad(c.secs)+":"+pad(c.ms,3);
+        
+        /*------------En cadena 2 tengo la vuelta anterior, y en cadena 4 la vuelta actual sin formato, para realizar operaciones-----------*/
+        
+        /*La razon de tener estos valores en cadena, es para calcular de manera mas sencilla los minutos,segundos,etc*/
+        cadena2 = pad(parseInt(d.hrs))+pad(parseInt(d.mins))+pad(parseInt(d.secs))+pad(parseInt(d.ms),3);
+        
+        cadena4 = pad(c.hrs)+pad(c.mins)+pad(c.secs)+pad(c.ms,3);
+        
+        
+        /*-----Resto los valores, si el valor es negativo, has tardado menos, y lo pongo en verde y le quito el negativo, si no, saldra en rojo-----*/
+        var res = parseInt(cadena4)-parseInt(cadena2);
+        
+        if (res<0){
+            color="green";
+            res = res*-1;
+        }
+        
+        
+        
+        //console.log(pos," ",cadena3,"cadena2: ",cadena4);
         /*console.log(difer.hrs,difer.mins,difer.secs,difer.ms);
         console.log(c.hrs,c.mins,c.secs,c.ms);
         */
-        $("#laps li:nth-child("+pos+")").append("<span style='color:blue'> --- "+cadena+" --- "+"</span>"+"<span style='color:"+color+"'>"+cadena2+"</span>");
+        $("#laps li:nth-child("+pos+")").append("<span style='color:blue'> --- "+cadena+" --- "+"</span>"+"<span style='color:"+color+"'>"+conversor(res)+"</span>");
         
+    }
+    
+    
+    /*------------Funcion para convertir el tiempo de cadenas anterior, a el formato en el cual imprimo los numeros-----------*/
+    function conversor(time){
+        var hras=0,min=0,sec=0;
+        while (time>=10000000){
+            hras++;
+            time = time - 10000000;
+        }
+        while (time>=100000){
+            min++;
+            time = time - 100000;
+        }
+        while (time>=1000){
+            sec++;
+            time = time - 1000;
+        }
+        
+        var convertido = {
+            hrs: hras,
+            mins: min,
+            secs: sec,
+            ms: time
+        }
+        
+        var cadena = pad(convertido.hrs)+":"+pad(convertido.mins)+":"+pad(convertido.secs)+":"+pad(convertido.ms,3);
+        return cadena;
     }
     
 });
