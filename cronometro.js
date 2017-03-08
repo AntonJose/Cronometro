@@ -21,7 +21,6 @@ $(function () {
         clearInterval(cronometro);
         centecimas = 0;
         actualizarTimer();
-        $("#laps").html("");
     });
     $("#lap").click(function () {
         $("#laps").append("<li>" + visual(centecimas) + "</li>");
