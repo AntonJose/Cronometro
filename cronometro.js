@@ -29,7 +29,7 @@ $(function () {
         if (lon>1){
             lon--;
             console.log($("#laps li:nth-child("+lon+")").text());
-            difer(visual(centecimas),$("#laps li:nth-child("+lon+")").text(),lon);
+            vuelta(visual(centecimas),$("#laps li:nth-child("+lon+")").text(),lon);
         }
     });
 
@@ -62,7 +62,7 @@ $(function () {
             return ('00' + n).slice(-z);
     };
     
-    function difer(timeA,timeB,pos){
+    function vuelta(timeA,timeB,pos){
         pos++;
         var a = {
             hrs: timeA.substring(0,2),
