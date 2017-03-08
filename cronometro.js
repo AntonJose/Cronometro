@@ -92,10 +92,55 @@ $(function () {
         };
         
         c.comprueba();
+        var difer;
+        var d = $("#laps li:nth-child("+(pos-1)+")").text();
+        console.log("D:",d);
+        
+        if(pos-1==1){
+            difer = {
+                hrs: d.substring(0,2),
+                mins: d.substring(3,5) ,
+                secs: d.substring(6,8),
+                ms: d.substring(9,12)
+            }
+        }else{
+            difer = {
+                hrs: d.substring(17,19),
+                mins: d.substring(20,22) ,
+                secs: d.substring(23,25),
+                ms: d.substring(26,29)
+            }
+        }
+        
+        console.log(difer.hrs,difer.mins,difer.secs,difer.ms);
+        
+        difer = {
+            hrs: parseInt(c.hrs)-parseInt(difer.hrs),
+            mins: parseInt(c.mins)-parseInt(difer.mins),
+            secs: parseInt(c.secs)-parseInt(difer.secs),
+            ms: parseInt(c.ms)-parseInt(difer.ms),
+            comprueba: function(){
+                        /*if (difer.ms<0){
+                            difer.secs++;
+                            difer.ms = c.ms-1000;
+                            }*/   
+                        }
+        }
+        
+        difer.comprueba();
+        
+        var color="red";
+        if (difer.secs<0){
+            color="green";
+        }
+        
+        cadena2 = pad(difer.hrs)+":"+pad(difer.mins)+":"+pad(difer.secs)+":"+pad(difer.ms,3);
         
         cadena = pad(c.hrs)+":"+pad(c.mins)+":"+pad(c.secs)+":"+pad(c.ms,3);
+        console.log(difer.hrs,difer.mins,difer.secs,difer.ms);
         console.log(c.hrs,c.mins,c.secs,c.ms);
-        $("#laps li:nth-child("+pos+")").append("<span style='color:blue'> --- "+cadena+"</span>");
+        
+        $("#laps li:nth-child("+pos+")").append("<span style='color:blue'> --- "+cadena+" --- "+"</span>"+"<span style='color:"+color+"'>"+cadena2+"</span>");
         
     }
     
