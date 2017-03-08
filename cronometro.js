@@ -7,11 +7,15 @@ $(function () {
         $("#stop").removeClass("disabled");
         $("#reset").removeClass("disabled");
         cronometro = setInterval(cron, 10);
+        //$(".hourglass.empty.icon").transition("set looping").transition("tada","1500ms");
+        $(".hourglass.empty.icon").addClass("loading");
     });
     $("#stop").click(function () {
         $("#stop").addClass("disabled");
         $("#start").removeClass("disabled");
         clearInterval(cronometro);
+       // $(".hourglass.empty.icon").transition("remove looping");
+       $(".hourglass.empty.icon").removeClass("loading");
     });
     $("#reset").click(function () {
         $("#start").removeClass("disabled");
@@ -22,6 +26,8 @@ $(function () {
         centecimas = 0;
         actualizarTimer();
         $("#laps").html("");
+        //$(".hourglass.empty.icon").transition("remove looping");
+        $(".hourglass.empty.icon").reemptyClass("loading");
     });
     $("#lap").click(function () {
         $("#laps").append("<li>" + visual(centecimas) + "</li>");
