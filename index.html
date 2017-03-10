@@ -11,25 +11,42 @@
 
 <body>
     <div class="ui container">
-        <div class="ui grid">
-            <div class="eight wide column">
+        <div class="ui two column grid">
+            <div class="column">
                 <div class="ui inverted segment center aligned">
-					<p id="timer">00:00:00:000</p>
+					<p><i class="hourglass empty icon" aria-hidden="true"></i><span id="timer">00:00:00:000</span></p>
                 </div>
+                
+                <div class="ui buttons container" style="position:relative;left: -10px;">
+                        <button class="ui blue  button" id="start" style="min-width: 125px;">
+                            <i class="play icon"></i>
+                            Start
+                        </button>
+                        <button class="ui orange  button disabled" id="lap" style="min-width: 125px";>
+                            <i class="circle notched icon"></i>
+                            Vuelta
+                        </button>
+                        <button class="ui red  button disabled " id="stop" style="min-width: 125px;">
+                            <i class="pause icon"></i>
+                            Pausar
+                        </button>
+                        <button class="ui teal  button disabled" id="reset" style="min-width: 125px;">
+                            <i class="refresh icon"></i>
+                            Reiniciar
+                        </button>  
+                </div>
+                
             </div>
-            <div class="eight wide column">
+            
+            <div class="column">
                 <div class="ui segment center aligned">
-					<ol id="laps">
+                <h3>Vueltas</h3>
+					<ol id="laps" class="container">
 						
 					</ol>
                 </div>
 			</div>
-                <div class="ui inverted four buttons">
-                    <button class="ui blue button" id="start">Start</button>
-                    <button class="ui orange button disabled" id="lap">Vuelta</button>
-                    <button class="ui red button disabled" id="stop">Pausar</button>
-                    <button class="ui teal button disabled" id="reset">Reiniciar</button>
-                </div>
+                
             </div>
         </div>
         <script src="bower_components/jquery/dist/jquery.js"></script>
