@@ -2,6 +2,7 @@ $(function () {
     var centecimas = 0;
     var cronometro;
     $("#start").click(function () {
+        $("#laps").show();
         $("#start").addClass("disabled");
         $("#lap").removeClass("disabled");
         $("#stop").removeClass("disabled");
@@ -18,16 +19,19 @@ $(function () {
        $(".hourglass.empty.icon").removeClass("loading");
     });
     $("#reset").click(function () {
-        $("#start").removeClass("disabled");
-        $("#stop").addClass("disabled");
-        $("#reset").addClass("disabled");
-        $("#lap").addClass("disabled");
-        clearInterval(cronometro);
-        centecimas = 0;
-        actualizarTimer();
-        $("#laps").html("");
-        //$(".hourglass.empty.icon").transition("remove looping");
-        $(".hourglass.empty.icon").removeClass("loading");
+        $("#laps").slideUp(1000,function(){
+            $("#start").removeClass("disabled");
+            $("#stop").addClass("disabled");
+            $("#reset").addClass("disabled");
+            $("#lap").addClass("disabled");
+            clearInterval(cronometro);
+            centecimas = 0;
+            actualizarTimer();
+            $("#laps").html("");
+            //$(".hourglass.empty.icon").transition("remove looping");
+            $(".hourglass.empty.icon").removeClass("loading");
+        });
+    
     });
     $("#lap").click(function () {
         $("#laps").append("<li>" + visual(centecimas) + "</li>");
@@ -36,7 +40,7 @@ $(function () {
             lon--;
            /* console.log($("#laps li:nth-child("+lon+")").text());*/
             vuelta(visual(centecimas),$("#laps li:nth-child("+lon+")").text(),lon);
-        }
+        } 
     });
 
     function cron() {
@@ -180,5 +184,13 @@ $(function () {
         var cadena = pad(convertido.hrs)+":"+pad(convertido.mins)+":"+pad(convertido.secs)+":"+pad(convertido.ms,3);
         return cadena;
     }
+    
+    
+    var deviceHeight = $(window).height() - 30;
+    console.log(deviceHeight);
+    $("#vueltas").css("max-height",deviceHeight+"px");
+    
+    var container = document.getElementById('vueltas');
+    Ps.initialize(container);
     
 });
