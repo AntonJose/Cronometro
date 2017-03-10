@@ -27,7 +27,7 @@ $(function () {
         actualizarTimer();
         $("#laps").html("");
         //$(".hourglass.empty.icon").transition("remove looping");
-        $(".hourglass.empty.icon").reemptyClass("loading");
+        $(".hourglass.empty.icon").removeClass("loading");
     });
     $("#lap").click(function () {
         $("#laps").append("<li>" + visual(centecimas) + "</li>");
