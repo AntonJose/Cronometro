@@ -40,6 +40,7 @@ $(function () {
     });
     
     
+    //Boton vuelta, añade contenido ya formateado desde la funcion visual a la lista, y dependiendo si es la primera o siguientes vueltas lo muestra de una manera u otra
     $("#lap").click(function () {
         $("#laps").append("<li>" + visual(centecimas) + "</li>");
         var lon = $("#laps").children().length;
@@ -197,7 +198,7 @@ $(function () {
         return cadena;
     }
     
-    
+    //Obtengo tamaño maximo de la ventana y le resto los elementos superiores para asignarlo a la capa de las vueltas
     var deviceHeight = $(window).height() - 115;
     console.log(deviceHeight);
     $("#vueltas").css("max-height",deviceHeight+"px");
