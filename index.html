@@ -12,12 +12,12 @@
 
 <body>
     <div class="ui container">
+            <div class="ui inverted segment center aligned">
+				<p><i class="hourglass empty icon" aria-hidden="true"></i><span id="timer">00:00:00:000</span></p>
+            </div>
         <div class="ui two column grid">
             <div class="column">
-                <div class="ui inverted segment center aligned">
-					<p><i class="hourglass empty icon" aria-hidden="true"></i><span id="timer">00:00:00:000</span></p>
-                </div>
-                
+
                 <div class="ui buttons container" style="position:relative;left: -10px;">
                         <button class="ui blue  button" id="start" style="min-width: 125px;">
                             <i class="play icon"></i>
@@ -35,15 +35,13 @@
                             <i class="refresh icon"></i>
                             Reiniciar
                         </button>  
-                </div>
-                
+                </div>            
             </div>
             
             <div class="column">
                 <div class="ui segment center aligned" id="vueltas">
-                <h3>Vueltas</h3>
-					<ol id="laps" >
-						
+                    <h3>Vueltas</h3>
+					<ol id="laps" >						
 					</ol>
                 </div>
 			</div>

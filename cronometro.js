@@ -19,20 +19,27 @@ $(function () {
        $(".hourglass.empty.icon").removeClass("loading");
     });
     $("#reset").click(function () {
-        $("#laps").slideUp(1000,function(){
+        $("#stop").addClass("disabled");
+        $("#reset").addClass("disabled");
+        $("#lap").addClass("disabled");
+        clearInterval(cronometro);
+        centecimas = 0;
+        actualizarTimer();
+        
+        $("#laps").slideUp(700,function(){
             $("#start").removeClass("disabled");
-            $("#stop").addClass("disabled");
-            $("#reset").addClass("disabled");
-            $("#lap").addClass("disabled");
-            clearInterval(cronometro);
-            centecimas = 0;
-            actualizarTimer();
             $("#laps").html("");
             //$(".hourglass.empty.icon").transition("remove looping");
             $(".hourglass.empty.icon").removeClass("loading");
+            $('div').animate({
+                scrollTop: $("#laps").height()
+            },
+            'slow');
         });
-    
+         
     });
+    
+    
     $("#lap").click(function () {
         $("#laps").append("<li>" + visual(centecimas) + "</li>");
         var lon = $("#laps").children().length;
@@ -40,6 +47,11 @@ $(function () {
             lon--;
            /* console.log($("#laps li:nth-child("+lon+")").text());*/
             vuelta(visual(centecimas),$("#laps li:nth-child("+lon+")").text(),lon);
+            $('div').animate({ 
+               scrollTop: $("#laps").outerHeight()}, 
+               1000, 
+               "swing"
+            );
         } 
     });
 
@@ -186,7 +198,7 @@ $(function () {
     }
     
     
-    var deviceHeight = $(window).height() - 30;
+    var deviceHeight = $(window).height() - 115;
     console.log(deviceHeight);
     $("#vueltas").css("max-height",deviceHeight+"px");
     
